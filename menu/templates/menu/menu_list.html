@@ -1,0 +1,23 @@
+{% extends "menu/layout.html" %}
+
+
+{% block content %}
+
+    {% if menu.expiration_date %}
+        <div class="date">
+            Expires on: {{ menu.expiration_date }}
+        </div>
+    {% endif %}
+
+    {% for menu in menus %}
+        <h1>
+            <a class="btn btn-default" href="{% url 'menu_edit' pk=menu.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="{% url 'menu_detail' pk=menu.pk %}">{{ menu.season }}</a>
+        </h1>
+        <p>{{ menu.items.all|join:", "}}</p>
+        <br>
+    {% endfor %}
+
+    <a href="{% url 'menu_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Create New Menu</a>
+
+{% endblock %}
